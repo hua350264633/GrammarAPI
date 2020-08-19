@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrammarAPI", "GrammarAPI\GrammarAPI.csproj", "{408A2B8E-EC0E-4E57-B081-8A2C0013A752}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrammarAPI", "GrammarAPI\GrammarAPI.csproj", "{408A2B8E-EC0E-4E57-B081-8A2C0013A752}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ML.Dapper", "ML.Dapper\ML.Dapper.csproj", "{A33618D6-32E3-441E-B169-075D0EB63B07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrammarAPITests", "GrammarAPITests\GrammarAPITests.csproj", "{513707B6-5083-497B-8725-2EE38ECDB697}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{408A2B8E-EC0E-4E57-B081-8A2C0013A752}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{408A2B8E-EC0E-4E57-B081-8A2C0013A752}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{408A2B8E-EC0E-4E57-B081-8A2C0013A752}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A33618D6-32E3-441E-B169-075D0EB63B07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A33618D6-32E3-441E-B169-075D0EB63B07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A33618D6-32E3-441E-B169-075D0EB63B07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A33618D6-32E3-441E-B169-075D0EB63B07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{513707B6-5083-497B-8725-2EE38ECDB697}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{513707B6-5083-497B-8725-2EE38ECDB697}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{513707B6-5083-497B-8725-2EE38ECDB697}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{513707B6-5083-497B-8725-2EE38ECDB697}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

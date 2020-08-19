@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using ML.Dapper;
 
 namespace GrammarAPI
 {
@@ -21,9 +22,14 @@ namespace GrammarAPI
     {
         //log4net日志
         public static ILoggerRepository Repository { get; set; }
+        /// <summary>
+        /// 配置文件
+        /// </summary>
+        public IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration)
         {
+            //获取配置文件
             Configuration = configuration;
 
             //加载log4net日志配置文件
@@ -31,17 +37,33 @@ namespace GrammarAPI
             XmlConfigurator.Configure(Repository, new FileInfo("log4net.config"));
         }
 
-        public IConfiguration Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
 
+            #region 配置全局异常捕获
             services.AddMvc(options =>
             {
                 options.Filters.Add<Models.HttpGlobalExceptionFilter>(); //加入全局异常类
             });
+            #endregion
+
+            #region 配置数据库连接信息
+            //连接sqlserver
+            services.AddDapper(EnumDbStoreType.SqlServer, m =>
+            {
+                m.ConnectionString = Configuration.GetConnectionString("DefaultConnection");
+                m.DbType = EnumDbStoreType.SqlServer;
+            });
+
+            ////连接Oracle
+            //services.AddDapper("OracleConnection", m =>
+            //{
+            //    m.ConnectionString = Configuration.GetConnectionString("OracleConnectionString");
+            //    m.DbType = EnumDbStoreType.Oracle;
+            //});
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +72,10 @@ namespace GrammarAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error");
             }
 
             app.UseHttpsRedirection();
