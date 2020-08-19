@@ -46,6 +46,10 @@ namespace GrammarAPI
             services.AddMvc(options =>
             {
                 options.Filters.Add<Models.HttpGlobalExceptionFilter>(); //加入全局异常类
+
+                //注册返回结果中间件
+                options.Filters.Add(typeof(WebApiResultMiddleware));
+                options.RespectBrowserAcceptHeader = true;
             });
             #endregion
 
