@@ -27,7 +27,8 @@ namespace GrammarAPI.Controllers
             var result = _SqlDB.Query<dynamic>(@"select top 10 * from t_acl_user");
 
             //return new Result<object>() { data = result };
-            return result;
+            throw new Exception("aa");
+            return result;            
         }
 
     }
