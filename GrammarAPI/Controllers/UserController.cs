@@ -13,24 +13,20 @@ namespace GrammarAPI.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly DapperClient _SqlDB;
+        private readonly IDapperFactory DapperFactory;
+
         public UserController(IDapperFactory dapperFactory)
         {
-            _SqlDB = dapperFactory.CreateClient(EnumDbStoreType.SqlServer);
+            DapperFactory = dapperFactory;
         }
 
         [HttpGet]
         public object Get()
         {
-            //var testQuery = _OracleDB.Query<dynamic>(@"SELECT * FROM BASE_DEPT where ROWNUM<=5");
-
-            var result = _SqlDB.Query<dynamic>(@"select top 10 * from t_acl_user");
-
-            //return new Result<object>() { data = result };
-            throw new Exception("aa");
-            return result;            
+            var list = new List<dynamic>();
+            var _SqlDB = DapperFactory.CreateClient(EnumDbStoreType.SqlServer);
+            list.AddRange(_SqlDB.Query<dynamic>(@"select top 100 * from t_acl_user"));
+            return list;
         }
-
     }
-
 }
