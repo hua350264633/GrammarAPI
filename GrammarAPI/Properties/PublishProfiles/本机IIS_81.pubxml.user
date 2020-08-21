@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+此文件由 Web 项目的发布/打包过程使用。可以通过编辑此 MSBuild 文件
+自定义此过程的行为。为了解与此相关的更多内容，请访问 https://go.microsoft.com/fwlink/?LinkID=208121。 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAALSlJU26IOESKTW0SVXezVQAAAAACAAAAAAAQZgAAAAEAACAAAABT3jGrGyAzxaybomBZL4hRsXV1SFXyhYuD1wjalEN5uQAAAAAOgAAAAAIAACAAAAAW+dZ3+QcZ/uhLp9CSoaj9rS9WugGMf2cAzmXFqN5OwyAAAABxXD14w/DcHNVdGCTrUpCzqJ8cX0yNVJdqpk+zPjvQUkAAAAAu+1q2qDhtUJR2bmyeiA81NPJVF6ka/YtPHU9Ov6AG5P0c+WHx1Gth16uV6hzYe/HH18jWHxMT6KfoGqeFdfp3</EncryptedPassword>
+    <_PublishTargetUrl>I:\AllWebs\GrammarAPI</_PublishTargetUrl>
+  </PropertyGroup>
+</Project>
