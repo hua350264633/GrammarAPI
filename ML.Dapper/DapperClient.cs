@@ -7,40 +7,60 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using ML.Dapper.Models;
 
 namespace ML.Dapper
 {
     /// <summary>
     /// 客户端对象
     /// </summary>
-    public class DapperClient
+    /// <typeparam name="T">Info泛型</typeparam>
+    /// <typeparam name="TM">Mapper泛型</typeparam>
+    public class DapperClient//<T, TM> where T : class
     {
-        public ConnectionConfig CurrentConnectionConfig { get; set; }
-
-        public DapperClient(IOptionsMonitor<ConnectionConfig> config)
+        /// <summary>
+        /// 当前连接对象
+        /// </summary>
+        private IDbConnection _connection = null;
+        /// <summary>
+        /// 连接对象配置对象
+        /// </summary>
+        public DBConnectionConfig CurrentConnectionConfig { get; set; }
+        ///// <summary>
+        ///// 有参构造
+        ///// </summary>
+        ///// <param name="config"></param>
+        //public DapperClient(IOptionsMonitor<ConnectionConfig> config)
+        //{
+        //    CurrentConnectionConfig = config.CurrentValue;
+        //}
+        /// <summary>
+        /// 有参构造
+        /// </summary>
+        /// <param name="config"></param>
+        public DapperClient(DBConnectionConfig config)
         {
-            CurrentConnectionConfig = config.CurrentValue;
+            CurrentConnectionConfig = config;
         }
-
-        public DapperClient(ConnectionConfig config) { CurrentConnectionConfig = config; }
-
-        IDbConnection _connection = null;
+        /// <summary>
+        /// 连接对象
+        /// </summary>
         public IDbConnection Connection
         {
             get
             {
                 switch (CurrentConnectionConfig.DbType)
                 {
-                    case EnumDbStoreType.MySql:
+                    case EnumDBType.MySql:
                         //_connection = new MySql.Data.MySqlClient.MySqlConnection(CurrentConnectionConfig.ConnectionString);
                         break;
-                    case EnumDbStoreType.Sqlite:
+                    case EnumDBType.Sqlite:
                         //_connection = new SQLiteConnection(CurrentConnectionConfig.ConnectionString);
                         break;
-                    case EnumDbStoreType.SqlServer:
+                    case EnumDBType.SqlServer:
                         _connection = new SqlConnection(CurrentConnectionConfig.ConnectionString);
                         break;
-                    case EnumDbStoreType.Oracle:
+                    case EnumDBType.Oracle:
                         //_connection = new Oracle.ManagedDataAccess.Client.OracleConnection(CurrentConnectionConfig.ConnectionString);
                         break;
                     default:
@@ -50,6 +70,7 @@ namespace ML.Dapper
             }
         }
 
+        #region 查询
         /// <summary>
         /// 执行SQL返回集合
         /// </summary>
@@ -117,7 +138,9 @@ namespace ML.Dapper
                 return conn.Query<T>(strSql, param).FirstOrDefault<T>();
             }
         }
+        #endregion
 
+        #region 执行
         /// <summary>
         /// 执行SQL
         /// </summary>
@@ -179,8 +202,7 @@ namespace ML.Dapper
                 }
             }
         }
-
+        #endregion
 
     }
-
 }

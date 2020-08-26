@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ML.Dapper
+namespace ML.Dapper.Models
 {
-    public class ConnectionConfig
+    /// <summary>
+    /// 连接配置实体类
+    /// </summary>
+    public class DBConnectionConfig
     {
         /// <summary>
         /// 连接字符串
@@ -13,6 +16,6 @@ namespace ML.Dapper
         /// <summary>
         /// 数据库类型
         /// </summary>
-        public EnumDbStoreType DbType { get; set; }
+        public EnumDBType DbType { get; set; }
     }
 }

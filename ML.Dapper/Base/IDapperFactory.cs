@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ML.Dapper.Models;
+using System;
 
 namespace ML.Dapper.Base
 {
@@ -10,8 +11,8 @@ namespace ML.Dapper.Base
         /// <summary>
         /// 创建客户端对象
         /// </summary>
-        /// <param name="EnumDbStoreType">数据库类型名称</param>
+        /// <param name="DBType">数据库类型名称</param>
         /// <returns></returns>
-        DapperClient CreateClient(EnumDbStoreType EnumDbStoreType);
+        DapperClient CreateClient(EnumDBType DBType);
     }
 }

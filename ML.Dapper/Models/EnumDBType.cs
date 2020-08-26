@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ML.Dapper
+namespace ML.Dapper.Models
 {
     /// <summary>
     /// 数据库类型枚举类
     /// </summary>
-    public enum EnumDbStoreType
+    public enum EnumDBType
     {
         /// <summary>
         /// MySQL数据库
