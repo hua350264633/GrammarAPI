@@ -8,7 +8,13 @@ namespace ML.Dapper.Base
 
     public interface IDapperFactoryBuilder
     {
-        string Name { get; }
+        /// <summary>
+        /// 依赖注入名称（对应DBType类的枚举名称）
+        /// </summary>
+        public string Name { get; }
+        /// <summary>
+        /// 注入名称对应的服务对象
+        /// </summary>
 
         IServiceCollection Services { get; }
     }

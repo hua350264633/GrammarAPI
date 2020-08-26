@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ML.Dapper;
 using ML.Dapper.Base;
+using ML.Dapper.Models;
 
 namespace GrammarAPI.Controllers
 {
@@ -24,7 +25,7 @@ namespace GrammarAPI.Controllers
         public object Get()
         {
             var list = new List<dynamic>();
-            var _SqlDB = DapperFactory.CreateClient(EnumDbStoreType.SqlServer);
+            var _SqlDB = DapperFactory.CreateClient(EnumDBType.SqlServer);
             list.AddRange(_SqlDB.Query<dynamic>(@"select top 100 * from t_acl_user"));
             return list;
         }

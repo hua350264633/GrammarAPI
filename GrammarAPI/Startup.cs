@@ -8,6 +8,7 @@ using log4net.Config;
 using log4net.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -15,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ML.Dapper;
+using ML.Dapper.Models;
 
 namespace GrammarAPI
 {
@@ -37,12 +39,16 @@ namespace GrammarAPI
             XmlConfigurator.Configure(Repository, new FileInfo("log4net.config"));
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// 此方法由运行时调用。使用此方法可将服务添加到容器中。
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
 
-            #region 配置全局异常捕获
+            #region 配置中间件
             services.AddMvc(options =>
             {
                 options.Filters.Add<Models.HttpGlobalExceptionFilter>(); //加入全局异常类
@@ -55,17 +61,17 @@ namespace GrammarAPI
 
             #region 配置数据库连接信息
             //连接sqlserver
-            services.AddDapper(EnumDbStoreType.SqlServer, m =>
+            services.AddDapper(EnumDBType.SqlServer, configureClient =>
             {
-                m.ConnectionString = Configuration.GetConnectionString("DefaultConnection");
-                m.DbType = EnumDbStoreType.SqlServer;
+                configureClient.ConnectionString = Configuration.GetConnectionString("DefaultConnection");
+                configureClient.DbType = EnumDBType.SqlServer;
             });
 
             ////连接Oracle
             //services.AddDapper("OracleConnection", m =>
             //{
             //    m.ConnectionString = Configuration.GetConnectionString("OracleConnectionString");
-            //    m.DbType = EnumDbStoreType.Oracle;
+            //    m.DbType = DBType.Oracle;
             //});
             #endregion
         }
@@ -76,10 +82,6 @@ namespace GrammarAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
             }
 
             app.UseHttpsRedirection();
